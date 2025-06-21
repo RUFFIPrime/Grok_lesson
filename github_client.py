@@ -5,12 +5,9 @@ class GitHubClient:
     def __init__(self):  
         self.base_url = "https://api.github.com"  
     
-    def get_user_info(self, username):  
-        response = requests.get(f"{self.base_url}/users/{username}")  
-        if response.status_code == 200:  
-            return response.json()  
-        else:  
-            return {"error": f"Статус-код {response.status_code}"}    
+    def get_user_info(self, username):
+        response = requests.get(f"{self.base_url}/users/{username}")
+        return response.json() if response.status_code == 200 else {"error": f"Ошибка {response.status_code}"}    
     
     def get_repos(self, username):  
         response = requests.get(f"{self.base_url}/users/{username}/repos")  
