@@ -22,6 +22,13 @@ class GitHubClient:
         else:
             return {"error": f"Статус-код {response.status_code}"}
 
+    def get_user_bio(self, username):
+        response = requests.get(f"{self.base_url}/users/{username}")
+        if response.status_code == 200:
+            return response.json()['bio']
+        else:
+            return {"error": f"Статус-код {response.status_code}"}
+
 
 client = GitHubClient() 
 print(client.get_repo_stars("torvalds", "linux"))
